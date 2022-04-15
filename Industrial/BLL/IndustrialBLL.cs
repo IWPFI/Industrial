@@ -76,5 +76,89 @@ namespace Industrial.BLL
 
             return result;
         }
+
+        /// <summary>
+        /// Inits the devices.
+        /// </summary>
+        /// <remarks></remarks>
+        public DataResult<List<DeviceModel>> InitDevices()
+        {
+            DataResult<List<DeviceModel>> result = new DataResult<List<DeviceModel>>();
+            //result.State = false;
+
+            try
+            {
+                var devices = dataAccess.GetDevices();
+                var monitorValues = dataAccess.GetMonitorValues();
+
+                List<DeviceModel> deviceList = new List<DeviceModel>();
+                // 设备
+                foreach (var d in devices.AsEnumerable())
+                {
+                    DeviceModel dModel = new DeviceModel();
+                    deviceList.Add(dModel);
+
+                    dModel.DeviceID = d.Field<string>("d_id");
+                    dModel.DeviceName = d.Field<string>("d_name");
+                    //dModel.IsWarning = false;
+                    //dModel.IsRunning = true;
+
+                    // 点位
+                    foreach (var mv in monitorValues.AsEnumerable().Where(m => m.Field<string>("d_id") == dModel.DeviceID))
+                    {
+                        MonitorValueModel mvm = new MonitorValueModel();
+                        dModel.MonitorValueList.Add(mvm);
+
+                        mvm.ValueId = mv.Field<string>("value_id");
+                        mvm.ValueName = mv.Field<string>("value_name");
+                        mvm.StorageAreaID = mv.Field<string>("s_area_id");
+                        mvm.StartAddress = mv.Field<Int32>("address");
+                        mvm.DataType = mv.Field<string>("data_type");
+                        mvm.IsAlarm = mv.Field<Int32>("is_alarm") == 1;
+                        mvm.ValueDesc = mv.Field<string>("description");
+                        mvm.Unit = mv.Field<string>("unit");
+                        mvm.ValueState = Base.MonitorValueState.OK;
+
+                        // 警戒值
+                        var column = mv.Field<string>("alarm_lolo");
+                        mvm.LoLoAlarm = column == null ? 0.0 : double.Parse(column);
+                        column = mv.Field<string>("alarm_low");
+                        mvm.LowAlarm = column == null ? 0.0 : double.Parse(column);
+                        column = mv.Field<string>("alarm_high");
+                        mvm.HighAlarm = column == null ? 0.0 : double.Parse(column);
+                        column = mv.Field<string>("alarm_hihi");
+                        mvm.HiHiAlarm = column == null ? 0.0 : double.Parse(column);
+
+                        mvm.ValueStateChanged = (state, msg, value_id) =>
+                         {
+                             var index = dModel.WarningMessage.ToList().FindIndex(w => w.ValueId == value_id);
+                             if (index > -1)
+                                 dModel.WarningMessage.RemoveAt(index);
+
+                             if (state != Base.MonitorValueState.OK)
+                             {
+                                 dModel.IsWarning = true;
+                                 dModel.WarningMessage.Add(new WarningMessageModel { ValueId = value_id, Message = msg });
+                             }
+
+                             var ss = dModel.WarningMessage.Count > 0;
+                             if (dModel.IsWarning != ss)
+                             {
+                                 dModel.IsWarning = ss;
+                             }
+                         };
+                    }
+                }
+
+                result.State = true;
+                result.Data = deviceList;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
     }
 }

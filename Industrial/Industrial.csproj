@@ -64,6 +64,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\MonitorValueState.cs" />
+    <Compile Include="Base\NotifyPropertyBase.cs" />
     <Compile Include="BLL\DataResult.cs" />
     <Compile Include="BLL\IndustrialBLL.cs" />
     <Compile Include="DAL\DataAccess.cs" />
@@ -73,7 +75,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DeviceModel.cs" />
+    <Compile Include="Model\MonitorValueModel.cs" />
     <Compile Include="Model\StorageModel.cs" />
+    <Compile Include="Model\WarningMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
