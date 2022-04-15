@@ -15,7 +15,7 @@ namespace Industrial.BLL
         /// 状态
         /// </summary>
         /// <remarks>没有异常就返回true</remarks>
-        public bool State { get; set; }
+        public bool State { get; set; }=false;
 
         /// <summary>
         /// Gets or sets the message.

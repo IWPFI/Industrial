@@ -102,19 +102,27 @@ namespace Industrial.DAL
             return dt;
         }
 
-
+        /// <summary>
+        /// Gets the storage area.
+        /// </summary>
         public DataTable GetStorageArea()
         {
             string strSql = "select * from storage_area";
             return GetDatas(strSql);
         }
 
+        /// <summary>
+        /// Gets the devices.
+        /// </summary>
         public DataTable GetDevices()
         {
             string strSql = "select * from devices";
             return GetDatas(strSql);
         }
 
+        /// <summary>
+        /// Gets the monitor values.
+        /// </summary>
         public DataTable GetMonitorValues()
         {
             string strSql = "select * from monitor_values order by d_id,address";
