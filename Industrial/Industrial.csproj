@@ -64,6 +64,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BLL\DataResult.cs" />
+    <Compile Include="BLL\IndustrialBLL.cs" />
     <Compile Include="DAL\DataAccess.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -100,6 +102,16 @@
     <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
     <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{0a615daf-70d9-458a-bf5b-06380ec879da}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Controls.csproj">
+      <Project>{27a438f1-20e0-4714-886d-f5c519c28d8d}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
