@@ -64,6 +64,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\GlobalMonitor.cs" />
     <Compile Include="Base\MonitorValueState.cs" />
     <Compile Include="Base\NotifyPropertyBase.cs" />
     <Compile Include="BLL\DataResult.cs" />
@@ -75,6 +76,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modbus\RTU.cs" />
     <Compile Include="Model\DeviceModel.cs" />
     <Compile Include="Model\MonitorValueModel.cs" />
     <Compile Include="Model\StorageModel.cs" />
