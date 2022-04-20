@@ -1,5 +1,6 @@
 ﻿using Communication;
 using Industrial.BLL;
+using Industrial.Modbus;
 using Industrial.Model;
 using System;
 using System.Collections.Generic;
@@ -70,7 +71,7 @@ namespace Industrial.Base
                  var dr = bll.InitDevices();
                  if (dr.State)
                  {
-                     DeviceList=dr.Data;
+                     DeviceList = dr.Data;
                  }
                  else
                  {
@@ -78,11 +79,20 @@ namespace Industrial.Base
                      return;
                  }
 
-                 successAction();
-
-                 while (isRunning)
+                 //初始化串口通信
+                 var rtu = RTU.GetInstance(SerialInfo);
+                 if (rtu.Connection())
                  {
+                     successAction();
 
+                     while (isRunning)
+                     {
+
+                     }
+                 }
+                 else
+                 {
+                     faultAction("程序无法启动，串口连接初始化失败！请检查设备是否连接正常。");
                  }
              });
         }
