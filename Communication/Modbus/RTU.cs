@@ -11,9 +11,24 @@ namespace Industrial.Modbus
     public class RTU
     {
         private static RTU _instance;
+
         private static SerialInfo _serialInfo;
 
+        bool _isBusing = false;
+
         SerialPort _serialPort;
+
+        /// <summary>当前从站地址</summary>
+        int _currentSlave;
+
+        /// <summary></summary>
+        int _funcCode;
+
+        /// <summary>长度</summary>
+        int _wordLen;
+
+        /// <summary></summary>
+        int _startAddr;
 
 
         private RTU(SerialInfo serialInfo)
@@ -65,13 +80,38 @@ namespace Industrial.Modbus
             }
         }
 
+        int _receiveByteCount = 0;
+        byte[] _byteBuffer = new byte[512];//缓冲区
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+            byte _receiveBytes;
+            while (_serialPort.BytesToRead > 0)
+            {
+                _receiveBytes = (byte)_serialPort.ReadByte();
+                _byteBuffer[_receiveByteCount] = _receiveBytes;
+                _receiveByteCount++;
+                if (_receiveByteCount >= 512)
+                {
+                    _receiveByteCount = 0;
+
+                    //清除输入缓冲区
+                    _serialPort.DiscardInBuffer();
+                    return;
+                }
+            }
         }
 
         public async Task<bool> Send(int slaveAddr, byte funcCode, int startAddr, int len)
         {
+            _currentSlave = slaveAddr;
+            _funcCode = funcCode;
+            _startAddr = startAddr;
+
+            if (funcCode == 0x01)
+                _wordLen = len / 8 + ((len % 8 > 0) ? 1 : 0);
+            if (funcCode == 0x03)
+                _wordLen = len * 2;
+
             List<byte> sendBuffer = new List<byte>();
             sendBuffer.Add((byte)slaveAddr);
             sendBuffer.Add(funcCode);
@@ -85,7 +125,11 @@ namespace Industrial.Modbus
 
             try
             {
+                while (_isBusing) { }//通过循环将其卡在着--同时并发的时候
+
+                _isBusing = true;
                 _serialPort.Write(sendBuffer.ToArray(), 0, 8);
+                _isBusing = false;
 
                 await Task.Delay(1000);//设置1秒延迟
             }
