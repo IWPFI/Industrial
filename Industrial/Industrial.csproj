@@ -76,7 +76,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modbus\RTU.cs" />
     <Compile Include="Model\DeviceModel.cs" />
     <Compile Include="Model\MonitorValueModel.cs" />
     <Compile Include="Model\StorageModel.cs" />

@@ -33,6 +33,7 @@ namespace Industrial.Base
 
         static bool isRunning = true;
         static Task mainTask = null;//清除线程
+        static RTU rtuInstance = null;
 
         /// <summary>
         /// 
@@ -80,8 +81,8 @@ namespace Industrial.Base
                  }
 
                  //初始化串口通信
-                 var rtu = RTU.GetInstance(SerialInfo);
-                 if (rtu.Connection())
+                 rtuInstance = RTU.GetInstance(SerialInfo);
+                 if (rtuInstance.Connection())
                  {
                      successAction();
 
@@ -101,10 +102,9 @@ namespace Industrial.Base
         {
             isRunning = false;
 
-            if (mainTask != null)
-            {
-                mainTask.Wait();
-            }
+            if (rtuInstance != null) { rtuInstance.Dispose(); }
+
+            if (mainTask != null) { mainTask.Wait(); }
         }
     }
 }
