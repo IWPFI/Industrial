@@ -65,7 +65,9 @@ namespace Industrial.Base
                  }
                  else
                  {
-                     faultAction.Invoke(sa.Message); return;
+                     //faultAction.Invoke(sa.Message);
+                     faultAction(sa.Message);
+                     return;
                  }
 
                  /// 初始化设备变量集合以及警戒值
@@ -76,7 +78,8 @@ namespace Industrial.Base
                  }
                  else
                  {
-                     faultAction.Invoke(dr.Message);
+                     //faultAction.Invoke(dr.Message);
+                     faultAction(sa.Message);
                      return;
                  }
 

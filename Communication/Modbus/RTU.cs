@@ -35,6 +35,7 @@ namespace Industrial.Modbus
 
         private RTU(SerialInfo serialInfo)
         {
+            _serialPort = new SerialPort();
             _serialInfo = serialInfo;
         }
 
@@ -69,7 +70,7 @@ namespace Industrial.Modbus
             {
                 return false;
             }
-            return false;
+            return true;
         }
 
         public void Dispose()
