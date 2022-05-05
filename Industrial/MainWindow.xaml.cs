@@ -24,5 +24,11 @@ namespace Industrial
         {
             InitializeComponent();
         }
+
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                this.DragMove();//窗口移动
+        }
     }
 }

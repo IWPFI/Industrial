@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Industrial"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="科技节能管理控制系统" Height="750" Width="1300"
+        WindowStyle="None" AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip" 
+        WindowStartupLocation="CenterScreen"
+        MouseMove="Window_MouseMove">
+    <Window.Resources>
+        <ResourceDictionary Source="Assets/Style/MainWindowStyle.xaml"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.Background>
+            <RadialGradientBrush Center="0.5,0.7" GradientOrigin="0.5,0.7" RadiusY="0.8" RadiusX="0.8">
+                <GradientStop Color="#FFA4B3D3"/>
+                <GradientStop Color="#FF302C5D" Offset="0.952"/>
+                <GradientStop Color="#FF96AAD4" Offset="0.162"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Border Width="55" Height="55" Margin="10,0,20,0" HorizontalAlignment="Left">
+                <Border.Background>
+                    <ImageBrush ImageSource="Assets/Images/Logo.ico"/>
+                </Border.Background>
+            </Border>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="朝夕科技节能管理控制系统" Foreground="White" FontSize="25" Margin="85,0,0,0"/>
+                <Border Height="45" Background="Transparent" BorderBrush="#FF6800" BorderThickness="0,0,0,1"
+                        Margin="10,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="70,0,0,0">
+                        <RadioButton Content="系统监控" Tag="&#xe795;" Style="{StaticResource NavTabButtonStyle}" IsChecked="True"/>
+                        <RadioButton Content="实时曲线" Tag="&#xe609;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="历史曲线" Tag="&#xe67d;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="控制策略" Tag="&#xe730;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="系统操作" Tag="&#xe682;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="报警管理" Tag="&#xe94e;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="报表管理" Tag="&#xe65c;" Style="{StaticResource NavTabButtonStyle}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
