@@ -35,7 +35,7 @@ namespace Industrial.Model
         /// <summary>
         /// Gets or sets a value indicating whether is running.
         /// </summary>
-        /// <remarks>是否正常运行</remarks>
+        /// <remarks>是否正在运行</remarks>
         public bool IsRunning
         {
             get { return _isRunning; }

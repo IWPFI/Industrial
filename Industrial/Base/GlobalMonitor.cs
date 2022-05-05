@@ -82,6 +82,8 @@ namespace Industrial.Base
 
                  //初始化串口通信
                  rtuInstance = RTU.GetInstance(SerialInfo);
+                 rtuInstance.ResponseData = new Action<int, List<byte>>(ParsingData);
+
                  if (rtuInstance.Connection())
                  {
                      successAction();
@@ -105,6 +107,25 @@ namespace Industrial.Base
             if (rtuInstance != null) { rtuInstance.Dispose(); }
 
             if (mainTask != null) { mainTask.Wait(); }
+        }
+
+        /// <summary>
+        /// 解析数据
+        /// </summary>
+        /// <param name="start_addr"></param>
+        /// <param name="byteList"></param>
+        private static void ParsingData(int start_addr, List<byte> byteList)
+        {
+            if (byteList != null && byteList.Count > 0)
+            {
+                // 查找设备监控点位与当前返回报文相关的监控数据列表
+                // 根据从站地址、功能码、起始地址
+                var mvl = (from q in DeviceList
+                           from m in q.MonitorValueList
+                           where m.StorageAreaID == (byteList[0].ToString() + byteList[1].ToString("00") + start_addr.ToString())
+                           select m
+                         ).ToList();
+            }
         }
     }
 }

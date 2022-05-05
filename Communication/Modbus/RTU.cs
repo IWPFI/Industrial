@@ -10,6 +10,8 @@ namespace Industrial.Modbus
 {
     public class RTU
     {
+        public Action<int, List<byte>> ResponseData;//定义委托
+
         private static RTU _instance;
 
         private static SerialInfo _serialInfo;
@@ -21,13 +23,13 @@ namespace Industrial.Modbus
         /// <summary>当前从站地址</summary>
         int _currentSlave;
 
-        /// <summary></summary>
+        /// <summary>功能码</summary>
         int _funcCode;
 
         /// <summary>长度</summary>
         int _wordLen;
 
-        /// <summary></summary>
+        /// <summary>起始地址</summary>
         int _startAddr;
 
 
@@ -81,7 +83,8 @@ namespace Industrial.Modbus
         }
 
         int _receiveByteCount = 0;
-        byte[] _byteBuffer = new byte[512];//缓冲区
+        /// <summary>缓冲区</summary>
+        byte[] _byteBuffer = new byte[512];
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             byte _receiveBytes;
@@ -99,6 +102,35 @@ namespace Industrial.Modbus
                     return;
                 }
             }
+
+            if (_byteBuffer[0] == (byte)_currentSlave && _byteBuffer[1] == _funcCode && _receiveByteCount >= _wordLen + 5)
+            {
+                // 检查crc
+                // ...........
+                // 返回数据
+                ResponseData?.Invoke(_startAddr, new List<byte>(SubByteArray(_byteBuffer, 0, _wordLen + 3)));
+                _serialPort.DiscardInBuffer();
+            }
+        }
+
+        /// <summary>
+        /// 截取ByteArray(字节长度)
+        /// </summary>
+        /// <param name="byteArr">The byte arr.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="len">The len.</param>
+        /// <returns>An array of byte.</returns>
+        private byte[] SubByteArray(byte[] byteArr, int start, int len)
+        {
+            byte[] Res = new byte[len];
+            if (byteArr != null && byteArr.Length > len)
+            {
+                for (int i = 0; i < len; i++)
+                {
+                    Res[i] = byteArr[i + start];
+                }
+            }
+            return Res;
         }
 
         public async Task<bool> Send(int slaveAddr, byte funcCode, int startAddr, int len)
