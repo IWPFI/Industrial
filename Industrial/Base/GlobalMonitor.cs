@@ -42,7 +42,7 @@ namespace Industrial.Base
         /// <param name="faultAction">失败</param>
         public static void Start(Action successAction, Action<string> faultAction)
         {
-            mainTask = Task.Run(() =>
+            mainTask = Task.Run(async () =>
              {
                  IndustrialBLL bll = new IndustrialBLL();
                  // 获取串口配置信息
@@ -88,9 +88,30 @@ namespace Industrial.Base
                  {
                      successAction();
 
+                     int startAddr = 0;
                      while (isRunning)
                      {
+                         //发送
 
+                         foreach (var item in StorageList)
+                         {
+                             if (item.Length > 100)
+                             {
+                                 //分段截取
+                                 startAddr = item.StartAddress;
+                                 int readCount = item.Length / 100;//如果是100就发一次请求，200就发两次
+                                 for (int i = 0; i < readCount; i++)
+                                 {
+                                     int readLen = i == readCount ? item.Length - 100 * i : 100;
+                                     await rtuInstance.Send(item.SlaveAddress, (byte)int.Parse(item.FuncCode), startAddr + 100 * i, readLen);
+                                     //异步
+                                 }
+                             }
+                             if (item.Length % 100 > 0)//把剩余的在请求一次
+                             {
+                                 await rtuInstance.Send(item.SlaveAddress, (byte)int.Parse(item.FuncCode), startAddr + 100 * (item.Length / 100), item.Length % 100);
+                             }
+                         }
                      }
                  }
                  else
@@ -125,6 +146,26 @@ namespace Industrial.Base
                            where m.StorageAreaID == (byteList[0].ToString() + byteList[1].ToString("00") + start_addr.ToString())
                            select m
                          ).ToList();
+
+                int startByte;
+                byte[] res = null;
+                foreach (var item in mvl)
+                {
+                    switch (item.DataType)
+                    {
+                        case "Float":
+                            startByte = item.StartAddress * 2 + 3;//只需要前面3个
+                            if (startByte < start_addr + byteList.Count)
+                            {
+                                res = new byte[4] { byteList[startByte], byteList[startByte + 1], byteList[startByte + 2],
+                                    byteList[startByte + 3] };//解析
+                                item.CurrentValue = Convert.ToDouble(res.ByteArrsyToFloat());
+                            }
+                            break;
+                        case "Bool":
+                            break;
+                    }
+                }
             }
         }
     }
