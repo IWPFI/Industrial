@@ -65,6 +65,8 @@ namespace Industrial.Modbus
 
                 _serialPort.ReceivedBytesThreshold = 1;
                 _serialPort.DataReceived += _serialPort_DataReceived;
+
+                _serialPort.Open();
             }
             catch (Exception)
             {
@@ -170,6 +172,7 @@ namespace Industrial.Modbus
             {
                 return false;
             }
+            _receiveByteCount = 0;
             return true;
         }
 
