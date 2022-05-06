@@ -30,5 +30,10 @@ namespace Industrial
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();//窗口移动
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -11,7 +11,12 @@
         WindowStartupLocation="CenterScreen"
         MouseMove="Window_MouseMove">
     <Window.Resources>
-        <ResourceDictionary Source="Assets/Style/MainWindowStyle.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Style/MainWindowStyle.xaml"/>
+                <ResourceDictionary Source="Assets/Style/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.Background>
@@ -33,7 +38,7 @@
                 </Border.Background>
             </Border>
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="朝夕科技节能管理控制系统" Foreground="White" FontSize="25" Margin="85,0,0,0"/>
+                <TextBlock Text="科技节能管理控制系统" Foreground="White" FontSize="25" Margin="85,0,0,0"/>
                 <Border Height="45" Background="Transparent" BorderBrush="#FF6800" BorderThickness="0,0,0,1"
                         Margin="10,0">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="70,0,0,0">
@@ -47,6 +52,28 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
+
+            <!--窗口控制按钮-->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Button Content="&#xe6af;" Style="{StaticResource IconButtonStyle}" FontSize="14"/>
+                <Button Content="&#xe6c9;" Style="{StaticResource IconButtonStyle}" FontSize="10"/>
+                <Button Content="&#xe67c;" Style="{StaticResource IconButtonStyle}" Click="Button_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        Margin="20,15">
+                <TextBlock Text="Admin" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
+                <Border Width="30" Height="30" CornerRadius="15" BorderThickness="1" BorderBrush="White">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Direction="0" Opacity="0.4" Color="White"/>
+                    </Border.Effect>
+                    <Border.Background>
+                        <ImageBrush ImageSource="Assets/Images/Sharingan.gif" Stretch="Uniform"/>
+                    </Border.Background>
+                </Border>
+            </StackPanel>
         </Grid>
+
+        <ContentControl Grid.Row="1"/>
     </Grid>
 </Window>
