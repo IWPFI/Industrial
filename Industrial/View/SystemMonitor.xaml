@@ -42,6 +42,11 @@
                         <zxc:CircularProgressBar Value="47" Width="60" Height="90" ForeColor="#38baec"/>
                     </StackPanel>
                 </UniformGrid>
+
+                <TextBlock Text="实时日志" Foreground="#44FFFFFF" Grid.Row="2" Margin="5,10"/>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" FontSize="11">
+                    <Hyperlink Foreground="#66DFFDFF">详情</Hyperlink>
+                </TextBlock>
             </Grid>
         </Grid>
     </Grid>

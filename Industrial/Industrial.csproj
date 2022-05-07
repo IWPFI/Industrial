@@ -59,6 +59,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\CommandBase.cs" />
+    <Compile Include="Base\LogType.cs" />
+    <Compile Include="Model\logModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\ReportManagement.xaml.cs">
       <DependentUpon>ReportManagement.xaml</DependentUpon>
