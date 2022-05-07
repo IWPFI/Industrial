@@ -13,8 +13,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Assets/Style/MainWindowStyle.xaml"/>
                 <ResourceDictionary Source="Assets/Style/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Assets/Style/MainWindowStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -42,13 +42,15 @@
                 <Border Height="45" Background="Transparent" BorderBrush="#FF6800" BorderThickness="0,0,0,1"
                         Margin="10,0">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="70,0,0,0">
-                        <RadioButton Content="系统监控" Tag="&#xe795;" Style="{StaticResource NavTabButtonStyle}" IsChecked="True"/>
+                        <RadioButton Content="系统监控" Tag="&#xe795;" Style="{StaticResource NavTabButtonStyle}" IsChecked="True"
+                                     CommandParameter="Industrial.View.SystemMonitor"/>
                         <RadioButton Content="实时曲线" Tag="&#xe609;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="历史曲线" Tag="&#xe67d;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="控制策略" Tag="&#xe730;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="系统操作" Tag="&#xe682;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="报警管理" Tag="&#xe94e;" Style="{StaticResource NavTabButtonStyle}"/>
-                        <RadioButton Content="报表管理" Tag="&#xe65c;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="报表管理" Tag="&#xe65c;" Style="{StaticResource NavTabButtonStyle}"
+                                     CommandParameter="Industrial.View.ReportManagement"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -74,6 +76,6 @@
             </StackPanel>
         </Grid>
 
-        <ContentControl Grid.Row="1"/>
+        <ContentControl Grid.Row="1" Content="{Binding MainContent}"/>
     </Grid>
 </Window>

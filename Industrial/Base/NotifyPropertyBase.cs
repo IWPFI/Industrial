@@ -16,5 +16,12 @@ namespace Industrial.Base
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+        public void Set<T>(ref T field, T value, [CallerMemberName] string propName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) { return; }//field和value相等->return
+
+            field = value;
+            RaisePropertyChanged(propName);
+        }
     }
 }
