@@ -4,9 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Industrial.View"
+             xmlns:zxc="clr-namespace:Controls;assembly=Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="SystemMonitor" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Canvas/>
+        <Grid VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="系统总览" Foreground="White" FontSize="16" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+
+                <UniformGrid Rows="1" Grid.Row="1" Margin="0,40,0,0">
+                    <StackPanel>
+                        <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="#99FFFFFF"/>
+                        <zxc:CircularProgressBar Value="70" Width="60" Height="90" ForeColor="#20c9b4"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="#99FFFFFF"/>
+                        <zxc:CircularProgressBar Value="50" Width="60" Height="90"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="#99FFFFFF"/>
+                        <zxc:CircularProgressBar Value="47" Width="60" Height="90" ForeColor="#38baec"/>
+                    </StackPanel>
+                </UniformGrid>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
