@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Industrial.View"
-             xmlns:zxc="clr-namespace:Controls;assembly=Controls"
+             xmlns:zxc="clr-namespace:Controls;assembly=Controls" 
+             xmlns:vm="clr-namespace:Industrial.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vm:SystemMonitorViewModel x:Key="smVM"/>
+    </UserControl.Resources>
     <Grid>
         <Canvas/>
         <Grid VerticalAlignment="Top">
@@ -26,27 +30,62 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="系统总览" Foreground="White" FontSize="16" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+                <TextBlock Text="系统总览" Margin="0,0,20,0" FontSize="16" Foreground="White" HorizontalAlignment="Right"/>
 
                 <UniformGrid Rows="1" Grid.Row="1" Margin="0,40,0,0">
                     <StackPanel>
-                        <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="#99FFFFFF"/>
+                        <TextBlock Text="监控值" Foreground="#99FFFFFF" HorizontalAlignment="Center"/>
                         <zxc:CircularProgressBar Value="70" Width="60" Height="90" ForeColor="#20c9b4"/>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="#99FFFFFF"/>
+                        <TextBlock Text="监控值" Foreground="#99FFFFFF" HorizontalAlignment="Center"/>
                         <zxc:CircularProgressBar Value="50" Width="60" Height="90"/>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="#99FFFFFF"/>
+                        <TextBlock Text="监控值" Foreground="#99FFFFFF" HorizontalAlignment="Center"/>
                         <zxc:CircularProgressBar Value="47" Width="60" Height="90" ForeColor="#38baec"/>
                     </StackPanel>
                 </UniformGrid>
 
-                <TextBlock Text="实时日志" Foreground="#44FFFFFF" Grid.Row="2" Margin="5,10"/>
-                <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" FontSize="11">
+                <TextBlock Text="实时日志" Grid.Row="2" Margin="5,10" Foreground="#44FFFFFF"/>
+                <TextBlock Grid.Row="2" Margin="5" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Hyperlink Foreground="#66DFFDFF">详情</Hyperlink>
                 </TextBlock>
+                <ItemsControl Grid.Row="3" ItemsSource="{Binding Source={StaticResource smVM},Path=LogList}" AlternationCount="2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border Name="back" CornerRadius="14" Visibility="Collapsed" Background="#11FFFFFF"/>
+                                <Grid Height="28" TextBlock.FontSize="10" TextBlock.Foreground="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding RowNumber,StringFormat=\{0:00\}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding DeviceName}" Grid.Column="1" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding LogInfo}" Grid.Column="2" VerticalAlignment="Center"/>
+                                    <Border Name="type_back" Grid.Column="3" Height="26" Margin="0,1,1,1" CornerRadius="0,13,13,0">
+                                        <TextBlock Text="{Binding LogType}" Grid.Column="3" Margin="8,0" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Visibility" Value="Visible" TargetName="back"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding LogType}" Value="1">
+                                    <Setter Property="Background" Value="#66FF0000" TargetName="type_back"/>
+                                </DataTrigger>
+                                <!--<DataTrigger Binding="{Binding LogType}" Value="1">：Value可以设置为值，也可以设置为名称-->
+                                <DataTrigger Binding="{Binding LogType}" Value="Fault">
+                                    <Setter Property="Background" Value="red" TargetName="type_back"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
         </Grid>
     </Grid>
