@@ -12,9 +12,75 @@ namespace Industrial.ViewModel
     {
         public ObservableCollection<LogModel> LogList { get; set; } = new ObservableCollection<LogModel>();
 
+        public DeviceModel TestDevice { get; set; }
+
         public SystemMonitorViewModel()
         {
             InitLogInfo();
+
+            #region 测试数据，为了设置数据模板
+            TestDevice = new DeviceModel();
+            TestDevice.DeviceName = "冷却塔 1#";
+            TestDevice.IsRunning = true;
+            TestDevice.IsWarning = true;
+            TestDevice.MonitorValueList.Add(new MonitorValueModel
+            {
+                ValueId = "1",
+                ValueName = "液位",
+                Unit = "m",
+                CurrentValue = 45,
+                Values = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>
+                { 
+                    new LiveCharts.Defaults.ObservableValue(0), 
+                    new LiveCharts.Defaults.ObservableValue(0)
+                }
+            }); ;
+            TestDevice.MonitorValueList.Add(new MonitorValueModel
+            {
+                ValueId = "1",
+                ValueName = "入口压力",
+                Unit = "Mpa",
+                CurrentValue = 34,
+                Values = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue> { new LiveCharts.Defaults.ObservableValue(0), new LiveCharts.Defaults.ObservableValue(0) }
+            });
+            TestDevice.MonitorValueList.Add(new MonitorValueModel
+            {
+                ValueId = "1",
+                ValueName = "入口温度",
+                Unit = "℃",
+                CurrentValue = 34,
+                Values = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue> { new LiveCharts.Defaults.ObservableValue(0), new LiveCharts.Defaults.ObservableValue(0) }
+            });
+            TestDevice.MonitorValueList.Add(new MonitorValueModel
+            {
+                ValueId = "1",
+                ValueName = "出口压力",
+                Unit = "Mpa",
+                CurrentValue = 34,
+                Values = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue> { new LiveCharts.Defaults.ObservableValue(0), new LiveCharts.Defaults.ObservableValue(0) }
+            });
+            TestDevice.MonitorValueList.Add(new MonitorValueModel
+            {
+                ValueId = "1",
+                ValueName = "出口温度",
+                Unit = "℃",
+                CurrentValue = 34,
+                Values = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue> { new LiveCharts.Defaults.ObservableValue(0), new LiveCharts.Defaults.ObservableValue(0) }
+            });
+            TestDevice.MonitorValueList.Add(new MonitorValueModel
+            {
+                ValueId = "1",
+                ValueName = "补水压力",
+                Unit = "Mpa",
+                CurrentValue = 34,
+                Values = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue> { new LiveCharts.Defaults.ObservableValue(0), new LiveCharts.Defaults.ObservableValue(0) }
+            });
+
+            TestDevice.WarningMessage.Add(new WarningMessageModel { Message = "冷却塔1#液位极低，当前值：0" });
+            TestDevice.WarningMessage.Add(new WarningMessageModel { Message = "冷却塔1#入口压力极低，当前值：0" });
+            TestDevice.WarningMessage.Add(new WarningMessageModel { Message = "冷却塔1#入口温度极低，当前值：0" });
+
+            #endregion
         }
 
         void InitLogInfo()

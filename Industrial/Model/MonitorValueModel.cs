@@ -1,4 +1,6 @@
 ﻿using Industrial.Base;
+using LiveCharts;
+using LiveCharts.Defaults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +93,7 @@ namespace Industrial.Model
         /// <summary>
         /// Gets or sets the current value.
         /// </summary>
+        /// <remarks>当前值</remarks>
         public double CurrentValue
         {
             get { return _currentValue; }
@@ -125,7 +128,11 @@ namespace Industrial.Model
                     }
                     ValueStateChanged?.Invoke(ValueState, msg + "。当前值：" + value, ValueId);
                 }
+                Values.Add(new ObservableValue(value));
+                if (Values.Count > 60) Values.RemoveAt(0);
             }
         }
+
+        public ChartValues<ObservableValue> Values { get; set; } = new ChartValues<ObservableValue>();
     }
 }
