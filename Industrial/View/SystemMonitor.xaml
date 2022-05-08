@@ -8,7 +8,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:vm="clr-namespace:Industrial.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="1200">
     <UserControl.Resources>
         <ResourceDictionary>
             <vm:SystemMonitorViewModel x:Key="smVM"/>
@@ -18,7 +18,17 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Canvas/>
+        <Canvas Background="Transparent"
+                MouseWheel="Canvas_MouseWheel"
+                MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
+                MouseLeftButtonUp="Canvas_MouseLeftButtonUp"
+                MouseMove="Canvas_MouseMove">
+            <Viewbox Name="mainView" Canvas.Left="0" Canvas.Top="340">
+                <Grid>
+                    <Polygon VerticalAlignment="Bottom" Fill="#AAF7F9FA" Points="0,200 150,0 1000,0 1200 200 0,200" Stroke="#DDDFFDFF" StrokeThickness="2"/>
+                </Grid>
+            </Viewbox>
+        </Canvas>
         <Grid VerticalAlignment="Top" Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320"/>
