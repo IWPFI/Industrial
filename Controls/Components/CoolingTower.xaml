@@ -7,7 +7,49 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Name="frame" BorderThickness="1">
-        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState Name="SelectedState">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="frame" Storyboard.TargetProperty="(Border.BorderBrush)">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <SolidColorBrush Color="Orange"/>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="UnselectedState"/>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <VisualState Name="RunState">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:0.5" From="0" To="-360" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="rt" Storyboard.TargetProperty="Angle"/>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="gsGreen" Storyboard.TargetProperty="Color">
+                            <DiscreteColorKeyFrame Value="Green" KeyTime="0"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="StopState"/>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <VisualState Name="FaultState">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames RepeatBehavior="Forever"
+                                                      Storyboard.TargetName="gsRed1" Storyboard.TargetProperty="Color">
+                            <DiscreteColorKeyFrame Value="Red" KeyTime="0:0:0.5"/>
+                            <DiscreteColorKeyFrame Value="Gray" KeyTime="0:0:1"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="NormalState"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Viewbox VerticalAlignment="Center" HorizontalAlignment="Center">
             <Canvas Width="205" Height="245" Margin="5">
                 <Polygon Points="0,65 40,10 205,10 180,65" Fill="#EEE"/>
