@@ -63,6 +63,7 @@
     <Compile Include="CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\ComponentBase.cs" />
     <Compile Include="Components\CoolingTower.xaml.cs">
       <DependentUpon>CoolingTower.xaml</DependentUpon>
     </Compile>

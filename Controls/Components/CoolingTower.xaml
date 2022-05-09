@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Controls.Components.CoolingTower"
+﻿<local:ComponentBase x:Class="Controls.Components.CoolingTower"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -174,4 +174,4 @@
             </Canvas>
         </Viewbox>   
     </Border>
-</UserControl>
+</local:ComponentBase>
