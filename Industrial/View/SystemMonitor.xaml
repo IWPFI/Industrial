@@ -7,6 +7,8 @@
              xmlns:zxc="clr-namespace:Controls;assembly=Controls" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:vm="clr-namespace:Industrial.ViewModel"
+             xmlns:component="clr-namespace:Controls.Components;assembly=Controls"
+             xmlns:base="clr-namespace:Industrial.Base"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
     <UserControl.Resources>
@@ -26,6 +28,23 @@
             <Viewbox Name="mainView" Canvas.Left="0" Canvas.Top="340">
                 <Grid>
                     <Polygon VerticalAlignment="Bottom" Fill="#AAF7F9FA" Points="0,200 150,0 1000,0 1200 200 0,200" Stroke="#DDDFFDFF" StrokeThickness="2"/>
+
+                    <!--冷却塔-->
+                    <component:CoolingTower Width="90" Height="110" Margin="125,0,0,95" 
+                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                            Command="{Binding ComponentCommand}"
+                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[2]}"/> 
+                    
+                    <component:CoolingTower Width="95" Height="115" Margin="98,0,0,52"
+                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                            Command="{Binding ComponentCommand}"
+                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[1]}"/> 
+                    
+                    <component:CoolingTower Width="100" Height="120" Margin="70,0,0,10" 
+                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                            Command="{Binding ComponentCommand}"
+                                             CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[0]}"/>
+
                 </Grid>
             </Viewbox>
         </Canvas>
@@ -37,7 +56,8 @@
             </Grid.ColumnDefinitions>
 
             <!--左侧设备详情-->
-            <Grid DataContext="{Binding Source={StaticResource smVM},Path=TestDevice}">
+            <Grid DataContext="{Binding Source={StaticResource smVM}}"
+                  Visibility="{Binding IsShowDetail}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -45,9 +65,9 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <!--设备信息-->
-                <TextBlock Text="{Binding DeviceName}" Foreground="White" FontSize="14" Margin="0,15"/>
+                <TextBlock Text="{Binding CurrentDevice.DeviceName}" Foreground="White" FontSize="14" Margin="0,15"/>
 
-                 <ItemsControl Grid.Row="1" ItemsSource="{Binding MonitorValueList}">
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding CurrentDevice.MonitorValueList}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -89,14 +109,14 @@
                 <!--实时状态-->
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Height="40">
                     <TextBlock Text="实时状态：" Foreground="#99FFFFFF" VerticalAlignment="Center"/>
-                    <ToggleButton IsChecked="{Binding IsRunning}" Template="{StaticResource StateButtonTemplate}"/>
+                    <ToggleButton IsChecked="{Binding CurrentDevice.IsRunning}" Template="{StaticResource StateButtonTemplate}"/>
                 </StackPanel>
-                <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsWarning}"
+                <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding CurrentDevice.IsWarning}"
                               Template="{StaticResource WarningButtonTemplate}" Margin="0,0,15,0"
                               IsEnabled="False"/>
                 
                 <!--报警信息-->
-                <ItemsControl Grid.Row="3" ItemsSource="{Binding WarningMessage}">
+                <ItemsControl Grid.Row="3" ItemsSource="{Binding CurrentDevice.WarningMessage}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Message}" Foreground="#CCFF4400" TextWrapping="Wrap" LineHeight="22">

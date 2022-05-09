@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Industrial.Model
 {
+    /// <summary>
+    /// The device model.
+    /// </summary>
+    /// <remarks>设备模型类</remarks>
     public class DeviceModel  : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
