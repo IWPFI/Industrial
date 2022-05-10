@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Industrial.BLL
 {
@@ -131,21 +132,28 @@ namespace Industrial.BLL
 
                         mvm.ValueStateChanged = (state, msg, value_id) =>
                          {
-                             var index = dModel.WarningMessage.ToList().FindIndex(w => w.ValueId == value_id);
-                             if (index > -1)
-                                 dModel.WarningMessage.RemoveAt(index);
-
-                             if (state != Base.MonitorValueState.OK)
+                             try
                              {
-                                 dModel.IsWarning = true;
-                                 dModel.WarningMessage.Add(new WarningMessageModel { ValueId = value_id, Message = msg });
-                             }
+                                 Application.Current?.Dispatcher.Invoke(() =>
+                                 {
+                                     var index = dModel.WarningMessage.ToList().FindIndex(w => w.ValueId == value_id);
+                                     if (index > -1)
+                                         dModel.WarningMessage.RemoveAt(index);
 
-                             var ss = dModel.WarningMessage.Count > 0;
-                             if (dModel.IsWarning != ss)
-                             {
-                                 dModel.IsWarning = ss;
+                                     if (state != Base.MonitorValueState.OK)
+                                     {
+                                         dModel.IsWarning = true;
+                                         dModel.WarningMessage.Add(new WarningMessageModel { ValueId = value_id, Message = msg });
+                                     }
+                                 });
+
+                                 var ss = dModel.WarningMessage.Count > 0;
+                                 if (dModel.IsWarning != ss)
+                                 {
+                                     dModel.IsWarning = ss;
+                                 }
                              }
+                             catch { }
                          };
                     }
                 }
