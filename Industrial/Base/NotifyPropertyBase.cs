@@ -11,7 +11,10 @@ namespace Industrial.Base
     public class NotifyPropertyBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// 通知属性
+        /// </summary>
+        /// <param name="propName"></param>
         public void RaisePropertyChanged([CallerMemberName] string propName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));

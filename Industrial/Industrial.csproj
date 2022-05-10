@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>WPFBC.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
@@ -65,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\CommandBase.cs" />
+    <Compile Include="Base\Converter\Bool2VisibilityConverter.cs" />
     <Compile Include="Base\LogType.cs" />
     <Compile Include="Model\logModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -147,7 +151,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{0a615daf-70d9-458a-bf5b-06380ec879da}</Project>
@@ -163,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\Sharingan.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="WPFBC.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

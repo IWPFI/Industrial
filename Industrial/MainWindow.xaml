@@ -34,7 +34,7 @@
         <Grid>
             <Border Width="55" Height="55" Margin="10,0,20,0" HorizontalAlignment="Left">
                 <Border.Background>
-                    <ImageBrush ImageSource="Assets/Images/Logo.ico"/>
+                    <ImageBrush ImageSource="/WPFBC.ico"/>
                 </Border.Background>
             </Border>
             <StackPanel VerticalAlignment="Center">

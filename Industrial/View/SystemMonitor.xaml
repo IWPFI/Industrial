@@ -9,17 +9,19 @@
              xmlns:vm="clr-namespace:Industrial.ViewModel"
              xmlns:component="clr-namespace:Controls.Components;assembly=Controls"
              xmlns:base="clr-namespace:Industrial.Base"
+             xmlns:converter="clr-namespace:Industrial.Base.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
     <UserControl.Resources>
         <ResourceDictionary>
             <vm:SystemMonitorViewModel x:Key="smVM"/>
+            <converter:Bool2VisibilityConverter x:Key="Bool2VisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Assets/Style/SystemMonitorStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid DataContext="{Binding Source={StaticResource smVM}}">
         <Canvas Background="Transparent"
                 MouseWheel="Canvas_MouseWheel"
                 MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
@@ -33,17 +35,23 @@
                     <component:CoolingTower Width="90" Height="110" Margin="125,0,0,95" 
                                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                             Command="{Binding ComponentCommand}"
-                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[2]}"/> 
+                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[2]}"
+                                            IsRunning="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsRunning}"
+                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsWarning}"/> 
                     
                     <component:CoolingTower Width="95" Height="115" Margin="98,0,0,52"
                                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                             Command="{Binding ComponentCommand}"
-                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[1]}"/> 
+                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[1]}"
+                                            IsRunning="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsRunning}"
+                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsWarning}"/> 
                     
                     <component:CoolingTower Width="100" Height="120" Margin="70,0,0,10" 
                                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                             Command="{Binding ComponentCommand}"
-                                             CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[0]}"/>
+                                            CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[0]}"
+                                            IsRunning="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsRunning}"
+                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsWarning}"/>
 
                 </Grid>
             </Viewbox>
@@ -56,8 +64,7 @@
             </Grid.ColumnDefinitions>
 
             <!--左侧设备详情-->
-            <Grid DataContext="{Binding Source={StaticResource smVM}}"
-                  Visibility="{Binding IsShowDetail}">
+            <Grid Visibility="{Binding IsShowDetail,Converter={StaticResource Bool2VisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
