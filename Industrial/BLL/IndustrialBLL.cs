@@ -79,9 +79,9 @@ namespace Industrial.BLL
         }
 
         /// <summary>
-        /// Inits the devices.
+        /// Init the devices.
         /// </summary>
-        /// <remarks></remarks>
+        /// <remarks>初始化设备</remarks>
         public DataResult<List<DeviceModel>> InitDevices()
         {
             DataResult<List<DeviceModel>> result = new DataResult<List<DeviceModel>>();
@@ -101,8 +101,8 @@ namespace Industrial.BLL
 
                     dModel.DeviceID = d.Field<string>("d_id");
                     dModel.DeviceName = d.Field<string>("d_name");
-                    //dModel.IsWarning = false;
-                    //dModel.IsRunning = true;
+                    dModel.IsRunning = true;
+                    dModel.IsWarning = true;
 
                     // 点位
                     foreach (var mv in monitorValues.AsEnumerable().Where(m => m.Field<string>("d_id") == dModel.DeviceID))

@@ -37,15 +37,15 @@
                                             Command="{Binding ComponentCommand}"
                                             CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[2]}"
                                             IsRunning="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsRunning}"
-                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsWarning}"/> 
-                    
+                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsWarning}"/>
+
                     <component:CoolingTower Width="95" Height="115" Margin="98,0,0,52"
                                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                             Command="{Binding ComponentCommand}"
                                             CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[1]}"
                                             IsRunning="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsRunning}"
-                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsWarning}"/> 
-                    
+                                            IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsWarning}"/>
+
                     <component:CoolingTower Width="100" Height="120" Margin="70,0,0,10" 
                                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                             Command="{Binding ComponentCommand}"
@@ -53,6 +53,179 @@
                                             IsRunning="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsRunning}"
                                             IsFault="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsWarning}"/>
 
+                    <!--冷却泵-->
+                    <component:CoolingPump Panel.ZIndex="2" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="280,0,0,29.999" IsFault="True" IsRunning="False"/>
+                    <component:CoolingPump Panel.ZIndex="2" Width="57" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="288.458,0,0,61" IsFault="False" IsRunning="True"/>
+                    <component:CoolingPump Panel.ZIndex="2" Width="55" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="295.5,0,0,91" IsFault="False" IsRunning="True"/>
+
+                    <!--#region 管道 -->
+                    <component:Pipeline Height="5" Width="35" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="161,0,0,98" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <component:Pipeline Panel.ZIndex="1" Height="5" Width="26" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="208,0,0,180" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <component:Pipeline Panel.ZIndex="1" Height="5" Width="28" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="185,0,0,140"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <component:Pipeline Height="5" Width="70" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="193,0,0,97"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-66"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="25" Direction="2" CapRadius="2" LiquidColor="Orange" Margin="220,0,0,158"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-66"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="405" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="221,0,0,159"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom" Panel.ZIndex="6"/>
+
+                    <component:Pipeline Height="5" Width="20" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="480,0,0,158"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+
+                    <component:Pipeline Height="5" Width="20" Direction="1" CapRadius="2" LiquidColor="Orange" Margin="626,0,0,158"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+
+
+                    <component:Pipeline Height="5" Width="38" Direction="2" CapRadius="2" LiquidColor="Green" Margin="161.343,229.666,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <component:Pipeline Panel.ZIndex="1" Height="5" Width="30" Direction="2" CapRadius="2" LiquidColor="Green" Margin="184.718,188.416,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <component:Pipeline Height="5" Width="30" Direction="2" CapRadius="2" LiquidColor="Green" Margin="206,147,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <component:Pipeline Height="5" Width="70" Direction="2" CapRadius="2" LiquidColor="Green" Margin="193.731,233.549,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-66"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="28" Direction="1" CapRadius="2" LiquidColor="Green" Margin="220.92,172.465,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-66"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+
+                    <component:Pipeline Height="5" Width="56.708" Direction="2" CapRadius="2" LiquidColor="Green" Margin="222.929,169.082,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="3"/>
+                    <component:Pipeline Height="5" Width="30" Direction="2" CapRadius="2" LiquidColor="Green" Margin="282.845,153.584,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <component:Pipeline Height="5" Width="25.5" Direction="2" CapRadius="2" LiquidColor="Green" Margin="275.184,183.75,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <component:Pipeline Height="5" Width="23.333" Direction="2" CapRadius="2" LiquidColor="Green" Margin="266.456,212.287,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <component:Pipeline Height="5" Width="50.404" Direction="1" CapRadius="2" LiquidColor="Green" Margin="263.981,216.049,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-73"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="21" Direction="2" CapRadius="2" LiquidColor="Green" Margin="277,174,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-73"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="108.933" Direction="2" CapRadius="2" LiquidColor="Green" Margin="308.942,197.561,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="4">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-76"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="301.334" Direction="2" CapRadius="2" LiquidColor="Green" Margin="335.006,91.962,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <component:Pipeline Height="5" Width="9.917" Direction="1" CapRadius="1" LiquidColor="Green" Margin="296.5,195.876,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="5">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="21" Direction="2" CapRadius="2" LiquidColor="Green" Margin="292,194,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="4"/>
+                    <component:Pipeline Height="5" Width="10" Direction="1" CapRadius="1" LiquidColor="Green" Margin="303,166,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="5">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="19" Direction="2" CapRadius="2" LiquidColor="Green" Margin="299,165,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="4"/>
+                    <component:Pipeline Height="5" Width="10.073" Direction="1" CapRadius="1" LiquidColor="Green" Margin="311.284,137.461,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="5">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="19.562" Direction="2" CapRadius="2" LiquidColor="Green" Margin="306.343,135.116,0,0" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="4"/>
+                    <component:Pipeline Height="5" Width="30.23" Direction="2" CapRadius="2" LiquidColor="Green" Margin="491.284,94.795,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="95"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <component:Pipeline Height="5" Width="30.23" Direction="2" CapRadius="2" LiquidColor="Green" Margin="636.606,93.298,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1">
+                        <component:Pipeline.RenderTransform>
+                            <RotateTransform Angle="88"/>
+                        </component:Pipeline.RenderTransform>
+                    </component:Pipeline>
+                    <!--#endregion-->
+
+                    <!--#region 制冷机 -->
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="15,0 65,0 60,85 0,85" Fill="#443FADFF" Margin="450,0,0,70" Panel.ZIndex="5"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="5" Height="55" Fill="#663FADFF" Margin="510,0,0,15">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="-86.65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="450,0,0,15"/>
+
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 50,0 65,85 5,85" Fill="#443FADFF" Margin="610,0,0,70" Panel.ZIndex="7"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                               Width="5" Height="55" Fill="#663FADFF" Margin="610,0,0,15" RenderTransformOrigin="1,1">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="86.65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="615,0,0,15"/>
+                    <!--#endregion-->
+
+                    <!--#region 锅炉 -->
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 50,0 85,85 25,85" Fill="#443FADFF" Margin="770,0,0,70"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                               Width="25" Height="55" Fill="#663FADFF" Margin="770,0,0,15" RenderTransformOrigin="1,1">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="73.65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="795,0,0,15"/>
+
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 50,0 100,85 40,85" Fill="#443FADFF" Margin="915,0,0,70"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                               Width="40" Height="55" Fill="#663FADFF" Margin="915,0,0,15" RenderTransformOrigin="1,1">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="955,0,0,15"/>
+                    <!--#endregion-->
+
+                    <!--#region 水箱 -->
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 86,0 125,30 40,30" Fill="#443FADFF" Margin="925.408,0,0,238"/>
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                             Points="0 0 40 30 40 120 0 65" Fill="#663FADFF" Margin="925.498,0,0,147.875" RenderTransformOrigin="1,1">
+                    </Polygon>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="85" Height="89.812" Fill="#223FADFF" Margin="965.413,0,0,148.188"/>
+                    <!--#endregion-->
                 </Grid>
             </Viewbox>
         </Canvas>
@@ -85,7 +258,7 @@
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding ValueName,StringFormat=\{0\}:}" Foreground="#99FFFFFF" VerticalAlignment="Center"/>
-                                
+
                                 <lvc:CartesianChart Grid.Column="1" MinHeight="30" DataTooltip="{x:Null}">
                                     <lvc:CartesianChart.Series>
                                         <lvc:LineSeries Fill="Transparent" Values="{Binding Values}" PointGeometrySize="0" StrokeThickness="0.5">
@@ -105,14 +278,14 @@
                                         <lvc:Axis ShowLabels="False"/>
                                     </lvc:CartesianChart.AxisY>
                                 </lvc:CartesianChart>
-                                
+
                                 <TextBlock Text="{Binding CurrentValue}" Grid.Column="2" Foreground="#99FFFFFF" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                 <TextBlock Text="{Binding Unit}" Grid.Column="3" Foreground="#99FFFFFF" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                
+
                 <!--实时状态-->
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Height="40">
                     <TextBlock Text="实时状态：" Foreground="#99FFFFFF" VerticalAlignment="Center"/>
@@ -121,7 +294,7 @@
                 <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding CurrentDevice.IsWarning}"
                               Template="{StaticResource WarningButtonTemplate}" Margin="0,0,15,0"
                               IsEnabled="False"/>
-                
+
                 <!--报警信息-->
                 <ItemsControl Grid.Row="3" ItemsSource="{Binding CurrentDevice.WarningMessage}">
                     <ItemsControl.ItemTemplate>
