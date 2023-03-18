@@ -18,6 +18,13 @@ namespace Industrial.Modbus
 
         bool _isBusing = false;
 
+        #region SerialPort类
+        //SerialPort:SerialPort类是用于与串行端口进行通信的.NET Framework类库的一部分。
+        //它提供了访问串口通信的各种属性和方法，例如波特率、停止位、校验位、数据位等。
+        //通过使用SerialPort类，您可以打开串口连接、发送和接收数据以及监视接收缓冲区的信息等。
+        //在工业控制、通信、数据采集等领域，SerialPort类经常被用来与各种串口设备进行通信，例如无线模块，从而实现数据传输和远程控制等功能。
+        //SerialPort类的作用就是提供了一种简单、方便的方法来实现串口通信，并且能够实现高速、稳定的数据传输过程。 
+        #endregion
         SerialPort _serialPort;
 
         /// <summary>当前从站地址</summary>

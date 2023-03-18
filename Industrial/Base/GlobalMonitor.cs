@@ -36,7 +36,7 @@ namespace Industrial.Base
         static RTU rtuInstance = null;
 
         /// <summary>
-        /// 
+        /// 开始
         /// </summary>
         /// <param name="successAction">成功</param>
         /// <param name="faultAction">失败</param>
